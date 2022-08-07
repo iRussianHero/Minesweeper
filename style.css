@@ -1,1 +1,9 @@
-/*# sourceMappingURL=style.css.map */
+.field {
+  display: grid;
+  grid-template-columns: repeat(8, 40px);
+}
+
+button {
+  height: 40px;
+  font-size: 24px;
+}/*# sourceMappingURL=style.css.map */
