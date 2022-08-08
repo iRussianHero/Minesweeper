@@ -18,11 +18,30 @@ function startGame(width, height, bombs_count){
         const index = cells.indexOf(event.target);
         const row = Math.floor(index / width);
         const column = index % width;
-        event.target.innerHTML = isBomb(row, column) ? 'X' : ' ';
+        open(row, column);
     });
-}
 
-function isBomb(row, column){
-    const index = row * width + column;
-    return bombs.includes(index);
+    function getCount(row, column){
+        let count = 0;
+        for (let x = -1; x <= 1; x++){
+            for (let y = -1; y <= 1; y++) {
+                if (isBomb(row + y, column + x)){
+                    count++;
+                }       
+            }         
+        }
+        return count;
+    }
+    
+    function open(row, column) {
+        const index = row * width + column;
+        const cell = cells[index];
+        cell.innerHTML = isBomb(row, column) ? 'X' : getCount(row, column);
+        cell.disabled = true;
+    }
+
+    function isBomb(row, column){
+        const index = row * width + column;
+        return bombs.includes(index);
+    }
 }
